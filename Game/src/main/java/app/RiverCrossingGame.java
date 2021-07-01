@@ -17,8 +17,12 @@ public class RiverCrossingGame {
     }
 
     public void start() {
+        System.out.flush();
+        System.out.println("---- Welcome to River Cross Game ----");
+        System.out.println("> Enter \"help\" to check available commands");
+
         while (!gameStateManager.isEnded()) {
-            gameInputManager.waitingForInput().ifPresent(gameStateManager::update);
+            gameInputManager.input(gameStateManager.getState()).ifPresent(gameStateManager::update);
         }
     }
 }

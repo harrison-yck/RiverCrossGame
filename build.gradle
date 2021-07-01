@@ -29,3 +29,7 @@ allprojects {
     apply plugin: 'idea'
     idea.module.inheritOutputDirs = true
 }
+
+tasks.withType( JavaCompile ).configureEach {
+    options.forkOptions.jvmArgs.addAll( ['--add-opens', 'jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED'] )
+}

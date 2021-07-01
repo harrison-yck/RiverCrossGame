@@ -1,4 +1,5 @@
 import app.RiverCrossingGame;
+import app.command.Commands;
 import app.core.GameCommandController;
 import app.core.GameInputManager;
 import app.core.GameStateManager;
@@ -8,9 +9,8 @@ import app.core.GameStateManager;
  */
 public class Main {
     public static void main(String[] args) {
-        var gameInputManager = new GameInputManager(new GameCommandController());
-        var gameStateManager = new GameStateManager();
+        var gameInputManager = new GameInputManager(new GameCommandController(Commands.get()));
 
-        new RiverCrossingGame(gameInputManager, gameStateManager).start();
+        new RiverCrossingGame(gameInputManager, new GameStateManager()).start();
     }
 }

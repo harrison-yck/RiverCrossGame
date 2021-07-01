@@ -3,7 +3,7 @@ package app.character;
 /**
  * @author harrison
  */
-public class Mom implements Character {
+public class Criminal implements Character {
     @Override
     public boolean isAdult() {
         return true;
@@ -11,6 +11,6 @@ public class Mom implements Character {
 
     @Override
     public Identity identity() {
-        return Identity.MOM;
+        return Identity.CRIMINAL;
     }
 }

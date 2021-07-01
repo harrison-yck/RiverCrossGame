@@ -1,6 +1,7 @@
 package app.data;
 
 import app.character.Character;
+import app.character.Characters;
 
 /**
  * @author harrison
@@ -11,19 +12,18 @@ public class GameState {
 
     private final boolean isEnded;
 
-    GameArea startArea;
-    GameArea boat;
-    GameArea endArea;
+    final GameArea startArea;
+    final GameArea boatArea;
+    final GameArea endArea;
 
     public GameState() {
-        this(false, new GameArea(new Character[TOTAL_PEOPLE]), new GameArea(new Character[BOAT_CAPACITY]), new GameArea(new Character[TOTAL_PEOPLE]));
-        startArea = initState();
+        this(false, new GameArea(Characters.getDefaultCharacter()), new GameArea(new Character[BOAT_CAPACITY]), new GameArea(new Character[TOTAL_PEOPLE]));
     }
 
-    public GameState(boolean isEnded, GameArea startArea, GameArea boat, GameArea endArea) {
+    public GameState(boolean isEnded, GameArea startArea, GameArea boatArea, GameArea endArea) {
         this.isEnded = isEnded;
         this.startArea = startArea;
-        this.boat = boat;
+        this.boatArea = boatArea;
         this.endArea = endArea;
     }
 
@@ -31,7 +31,7 @@ public class GameState {
         return isEnded;
     }
 
-    private GameArea initState() {
-        return null;
+    public GameState move(Character character, GameAreaView fromArea, GameAreaView toArea) {
+
     }
 }

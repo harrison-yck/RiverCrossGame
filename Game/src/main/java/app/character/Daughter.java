@@ -3,14 +3,14 @@ package app.character;
 /**
  * @author harrison
  */
-public class Mom implements Character {
+public class Daughter implements Character {
     @Override
     public boolean isAdult() {
-        return true;
+        return false;
     }
 
     @Override
     public Identity identity() {
-        return Identity.MOM;
+        return Identity.DAUGHTER;
     }
 }

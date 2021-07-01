@@ -5,5 +5,9 @@ package app.character;
  */
 public enum Identity {
     POLICEMAN,
-    CRIMINAL
+    CRIMINAL,
+    SON,
+    DAUGHTER,
+    MOM,
+    DAD
 }

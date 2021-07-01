@@ -1,25 +1,30 @@
 package app.core;
 
+import app.data.GameRules;
 import app.data.GameState;
 import app.data.GameRule;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author harrison
  */
 public class GameRuleValidator {
-    private final List<GameRule> rules;
+    private final Set<GameRule> rules;
     private final Printer printer;
 
-    public GameRuleValidator(List<GameRule> rules, Printer printer) {
-        this.rules = rules;
+    public GameRuleValidator(Printer printer) {
+        this.rules = GameRules.get();
         this.printer = printer;
     }
 
     public boolean isValid(GameState state) {
-        if (!rules.stream().allMatch(rule -> rule.validate(state))) {
-//            printer;
+        Set<GameRule> failedRules = rules.stream().takeWhile(rule -> !rule.validate(state)).collect(Collectors.toSet());
+
+        if (!failedRules.isEmpty()) {
+            failedRules.forEach(rule -> rule.detail(state));
             return false;
         }
 

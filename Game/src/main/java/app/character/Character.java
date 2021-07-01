@@ -5,6 +5,6 @@ package app.character;
  */
 public interface Character {
     boolean isAdult();
-    Gender gender();
+
     Identity identity();
 }

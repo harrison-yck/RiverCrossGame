@@ -6,7 +6,11 @@ import java.util.Map;
  * @author harrison
  */
 public class Commands {
-    private final Map<String, Command> availableCommands = Map.of(
+    private static final Map<String, Command> AVAILABLE_COMMANDS = Map.of(
 
     );
+
+    public static Map<String, Command> get() {
+        return AVAILABLE_COMMANDS;
+    }
 }
