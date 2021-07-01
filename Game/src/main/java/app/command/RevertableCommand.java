@@ -2,8 +2,6 @@ package app.command;
 
 import app.data.GameState;
 
-import java.util.Stack;
-
 /**
  * @author harrison
  */
