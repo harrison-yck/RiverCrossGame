@@ -2,36 +2,93 @@ package app.data;
 
 import app.character.Character;
 import app.character.Characters;
+import app.character.Identity;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static app.data.GameAreaView.*;
 
 /**
  * @author harrison
  */
 public class GameState {
-    private static final int TOTAL_PEOPLE = 8;
     private static final int BOAT_CAPACITY = 2;
+    private static final int TOTAL_PEOPLE = 8;
 
-    private final boolean isEnded;
-
-    final GameArea startArea;
-    final GameArea boatArea;
-    final GameArea endArea;
-
-    public GameState() {
-        this(false, new GameArea(Characters.getDefaultCharacter()), new GameArea(new Character[BOAT_CAPACITY]), new GameArea(new Character[TOTAL_PEOPLE]));
+    private static Map<GameAreaView, GameArea> initialGameArea() {
+        return Map.of(
+                GameAreaView.START_AREA, new GameArea(Characters.getDefaultCharacter()),
+                GameAreaView.BOAT_AREA, new GameArea(new ArrayList<>(BOAT_CAPACITY)),
+                GameAreaView.END_AREA, new GameArea(new ArrayList<>(TOTAL_PEOPLE))
+        );
     }
 
-    public GameState(boolean isEnded, GameArea startArea, GameArea boatArea, GameArea endArea) {
-        this.isEnded = isEnded;
-        this.startArea = startArea;
-        this.boatArea = boatArea;
-        this.endArea = endArea;
+    private final boolean isEnded;
+    private final int operations;
+
+    final Map<GameAreaView, GameArea> gameArea;
+
+    public GameState() {
+        this(initialGameArea(), 0);
+    }
+
+    public GameState(Map<GameAreaView, GameArea> gameArea, int operations) {
+        this.gameArea = gameArea;
+        this.isEnded = gameArea.get(START_AREA).characters().size() == 0 && gameArea.get(BOAT_AREA).characters().size() == 0 && gameArea.get(END_AREA).characters().size() == TOTAL_PEOPLE;
+        this.operations = operations;
     }
 
     public boolean isEnded() {
         return isEnded;
     }
 
-    public GameState move(Character character, GameAreaView fromArea, GameAreaView toArea) {
+    public List<Character> getCharacters(GameAreaView area) {
+        return gameArea.get(area).characters();
+    }
 
+    public Set<Identity> getStartGameCharacterIdentity(GameState state, GameAreaView gameArea) {
+        return state.getCharacters(gameArea).stream().map(Character::identity).collect(Collectors.toUnmodifiableSet());
+    }
+
+    public GameState move(Character firstCharacter, Character secondCharacter, GameAreaView fromArea, GameAreaView toArea) {
+        GameArea from = gameArea.get(fromArea);
+        GameArea to = gameArea.get(toArea);
+
+        List<Character> mutatedFrom = getMutatedFrom(firstCharacter, secondCharacter, from);
+        List<Character> mutatedTo = getMutatedTo(firstCharacter, secondCharacter, to);
+
+        Map<GameAreaView, GameArea> newGameArea = new HashMap<>();
+        newGameArea.put(fromArea, new GameArea(mutatedFrom));
+        newGameArea.put(toArea, new GameArea(mutatedTo));
+        Arrays.stream(values()).filter(area -> area != fromArea && area != toArea).forEach(area -> newGameArea.put(area, gameArea.get(area)));
+
+        return new GameState(newGameArea, this.operations + 1);
+    }
+
+    private List<Character> getMutatedTo(Character firstCharacter, Character secondCharacter, GameArea to) {
+        List<Character> mutableTo = new ArrayList<>(to.characters());
+        if (firstCharacter != null) mutableTo.add(firstCharacter);
+        if (secondCharacter != null) mutableTo.add(secondCharacter);
+        return mutableTo;
+    }
+
+    private List<Character> getMutatedFrom(Character firstCharacter, Character secondCharacter, GameArea from) {
+        List<Character> mutableFrom = new ArrayList<>(from.characters());
+
+        if ((firstCharacter != null && !mutableFrom.remove(firstCharacter)) || (secondCharacter != null && !mutableFrom.remove(secondCharacter))) {
+            throw new IllegalArgumentException();
+        }
+
+        return mutableFrom;
+    }
+
+    public void print() {
+        System.out.println();
+        System.out.println("START_AREA: " + gameArea.get(START_AREA).characters());
+        System.out.println("BOAT_AREA: " + gameArea.get(BOAT_AREA).characters());
+        System.out.println("END_AREA: " + gameArea.get(END_AREA).characters());
+        System.out.println("operations: " + operations);
+        System.out.println();
     }
 }

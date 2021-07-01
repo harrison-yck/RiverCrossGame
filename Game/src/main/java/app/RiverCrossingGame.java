@@ -19,10 +19,13 @@ public class RiverCrossingGame {
     public void start() {
         System.out.flush();
         System.out.println("---- Welcome to River Cross Game ----");
-        System.out.println("> Enter \"help\" to check available commands");
+        System.out.println();
 
         while (!gameStateManager.isEnded()) {
             gameInputManager.input(gameStateManager.getState()).ifPresent(gameStateManager::update);
         }
+
+        gameStateManager.getState().print();
+        System.out.println("Congratulations! You win the game!");
     }
 }

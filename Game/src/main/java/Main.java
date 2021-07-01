@@ -9,8 +9,7 @@ import app.core.GameStateManager;
  */
 public class Main {
     public static void main(String[] args) {
-        var gameInputManager = new GameInputManager(new GameCommandController(Commands.get()));
-
+        var gameInputManager = new GameInputManager(new GameCommandController(Commands.getCommands(), Commands.getRevertableCommandFactortories()));
         new RiverCrossingGame(gameInputManager, new GameStateManager()).start();
     }
 }

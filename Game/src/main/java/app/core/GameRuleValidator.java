@@ -1,10 +1,9 @@
 package app.core;
 
-import app.data.GameRules;
+import app.rule.GameRules;
 import app.data.GameState;
-import app.data.GameRule;
+import app.rule.GameRule;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,18 +12,16 @@ import java.util.stream.Collectors;
  */
 public class GameRuleValidator {
     private final Set<GameRule> rules;
-    private final Printer printer;
 
-    public GameRuleValidator(Printer printer) {
+    public GameRuleValidator() {
         this.rules = GameRules.get();
-        this.printer = printer;
     }
 
     public boolean isValid(GameState state) {
-        Set<GameRule> failedRules = rules.stream().takeWhile(rule -> !rule.validate(state)).collect(Collectors.toSet());
+        Set<GameRule> failedRules = rules.stream().filter(rule -> !rule.isObeyed(state)).collect(Collectors.toSet());
 
         if (!failedRules.isEmpty()) {
-            failedRules.forEach(rule -> rule.detail(state));
+            failedRules.forEach(failedRule -> System.out.println(failedRule.error()));
             return false;
         }
 

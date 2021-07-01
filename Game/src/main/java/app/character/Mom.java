@@ -13,4 +13,9 @@ public class Mom implements Character {
     public Identity identity() {
         return Identity.MOM;
     }
+
+    @Override
+    public String toString() {
+        return identity().toString();
+    }
 }

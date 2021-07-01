@@ -13,4 +13,9 @@ public class Policeman implements Character {
     public Identity identity() {
         return Identity.POLICEMAN;
     }
+
+    @Override
+    public String toString() {
+        return identity().toString();
+    }
 }

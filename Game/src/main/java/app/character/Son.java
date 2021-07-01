@@ -13,4 +13,9 @@ public class Son implements Character {
     public Identity identity() {
         return Identity.SON;
     }
+
+    @Override
+    public String toString() {
+        return identity().toString();
+    }
 }

@@ -13,4 +13,9 @@ public class Criminal implements Character {
     public Identity identity() {
         return Identity.CRIMINAL;
     }
+
+    @Override
+    public String toString() {
+        return identity().toString();
+    }
 }

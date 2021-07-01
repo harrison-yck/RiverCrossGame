@@ -1,5 +1,6 @@
 package app.character;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,17 +11,15 @@ import static app.character.Identity.*;
  */
 public class Characters {
     private static final Map<Identity, Character> CHARACTERS = Map.of(
-        DAD, new Dad(),
-        MOM, new Mom(),
-        SON, new Son(),
-        DAUGHTER, new Daughter(),
-        POLICEMAN, new Policeman(),
-        CRIMINAL, new Criminal()
+            DAD, new Dad(),
+            MOM, new Mom(),
+            SON, new Son(),
+            DAUGHTER, new Daughter(),
+            POLICEMAN, new Policeman(),
+            CRIMINAL, new Criminal()
     );
 
-    private static final Set<Identity> FAMILY = Set.of(DAD, MOM, SON, DAUGHTER);
-
-    private static final Character[] DEFAULT_CHARACTERS = new Character[]{
+    private static final List<Character> DEFAULT_CHARACTERS = List.of(
             CHARACTERS.get(DAD),
             CHARACTERS.get(MOM),
             CHARACTERS.get(SON),
@@ -29,17 +28,17 @@ public class Characters {
             CHARACTERS.get(DAUGHTER),
             CHARACTERS.get(POLICEMAN),
             CHARACTERS.get(CRIMINAL)
-    };
+    );
 
-    public static Character[] getDefaultCharacter() {
+    public static List<Character> getDefaultCharacter() {
         return DEFAULT_CHARACTERS;
+    }
+
+    public static Set<Identity> getAvailableIdentity() {
+        return CHARACTERS.keySet();
     }
 
     public static Character of(Identity identity) {
         return CHARACTERS.get(identity);
-    }
-
-    public static boolean isFamilyMember(Identity identity) {
-        return FAMILY.contains(identity);
     }
 }

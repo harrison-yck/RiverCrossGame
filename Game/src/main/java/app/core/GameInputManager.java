@@ -11,22 +11,21 @@ import java.util.Scanner;
 public class GameInputManager {
     private final Scanner scanner;
     private final GameCommandController commandController;
-    private final GameRuleValidator validator;
 
     public GameInputManager(GameCommandController commandController) {
         this.scanner = new Scanner(System.in);
         this.commandController = commandController;
-        this.validator = new GameRuleValidator(new ConsolePrinter());
     }
 
     public Optional<GameState> input(GameState state) {
-        String str = scanner.next();
+        state.print();
+        System.out.println("> Enter \"help\" to check available commands");
 
+        String str = scanner.nextLine();
         try {
-            GameState newGameState = commandController.execute(str, state);
-
-            if (state == newGameState) return Optional.empty();
-            if (validator.isValid(newGameState)) return Optional.of(newGameState);
+            return Optional.ofNullable(commandController.execute(str, state));
+        } catch (IllegalArgumentException | IndexOutOfBoundsException ex) {
+            System.out.println("Invalid command: " + str);
         } catch (NullPointerException ex) {
             System.out.println("Unsupported command: " + str);
         }

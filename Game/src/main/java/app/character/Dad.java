@@ -13,4 +13,9 @@ public class Dad implements Character {
     public Identity identity() {
         return Identity.DAD;
     }
+
+    @Override
+    public String toString() {
+        return identity().toString();
+    }
 }

@@ -13,4 +13,9 @@ public class Daughter implements Character {
     public Identity identity() {
         return Identity.DAUGHTER;
     }
+
+    @Override
+    public String toString() {
+        return identity().toString();
+    }
 }
