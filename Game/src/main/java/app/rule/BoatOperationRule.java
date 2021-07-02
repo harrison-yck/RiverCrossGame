@@ -17,7 +17,7 @@ public class BoatOperationRule implements GameRule {
     }
 
     boolean validate(List<Character> characters) {
-        return characters.isEmpty() || (characters.get(0) != null && characters.get(0).isAdult()) || (characters.size() > 1 && characters.get(1).isAdult());
+        return characters.isEmpty() || characters.get(0) != null && characters.get(0).isAdult() || characters.size() > 1 && characters.get(1).isAdult();
     }
 
     @Override

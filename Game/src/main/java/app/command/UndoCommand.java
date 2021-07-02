@@ -8,13 +8,13 @@ import app.data.GameState;
 public class UndoCommand implements Command {
     @Override
     public GameState execute(GameState state, String[] parameters) {
-        if (undoList.isEmpty()) {
+        if (UNDO_LIST.isEmpty()) {
             System.out.println();
             System.out.println("No undo action is available!");
             System.out.println();
-            return null;
+            return null; // expected result, no exception is throw here
         } else {
-            RevertableCommand command = undoList.pop();
+            ReversibleCommand command = UNDO_LIST.pop();
             return command.undo(state);
         }
     }

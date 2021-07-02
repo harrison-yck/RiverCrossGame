@@ -4,7 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static app.character.Identity.*;
+import static app.character.Identity.CRIMINAL;
+import static app.character.Identity.DAD;
+import static app.character.Identity.DAUGHTER;
+import static app.character.Identity.MOM;
+import static app.character.Identity.POLICEMAN;
+import static app.character.Identity.SON;
 
 /**
  * @author harrison

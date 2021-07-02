@@ -4,10 +4,18 @@ import app.character.Character;
 import app.character.Characters;
 import app.character.Identity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import static app.data.GameAreaView.*;
+import static app.data.GameAreaView.BOAT_AREA;
+import static app.data.GameAreaView.END_AREA;
+import static app.data.GameAreaView.START_AREA;
+import static app.data.GameAreaView.values;
 
 /**
  * @author harrison
@@ -18,9 +26,9 @@ public class GameState {
 
     private static Map<GameAreaView, GameArea> initialGameArea() {
         return Map.of(
-                GameAreaView.START_AREA, new GameArea(Characters.getDefaultCharacters()),
-                GameAreaView.BOAT_AREA, new GameArea(new ArrayList<>(BOAT_CAPACITY)),
-                GameAreaView.END_AREA, new GameArea(new ArrayList<>(TOTAL_PEOPLE))
+                START_AREA, new GameArea(Characters.getDefaultCharacters()),
+                BOAT_AREA, new GameArea(new ArrayList<>(BOAT_CAPACITY)),
+                END_AREA, new GameArea(new ArrayList<>(TOTAL_PEOPLE))
         );
     }
 
@@ -35,7 +43,7 @@ public class GameState {
 
     public GameState(Map<GameAreaView, GameArea> gameArea, int operations) {
         this.gameArea = gameArea;
-        this.isEnded = gameArea.get(START_AREA).characters().size() == 0 && gameArea.get(BOAT_AREA).characters().size() == 0 && gameArea.get(END_AREA).characters().size() == TOTAL_PEOPLE;
+        this.isEnded = gameArea.get(START_AREA).characters().isEmpty() && gameArea.get(BOAT_AREA).characters().isEmpty() && gameArea.get(END_AREA).characters().size() == TOTAL_PEOPLE;
         this.operations = operations;
     }
 
@@ -58,7 +66,7 @@ public class GameState {
         List<Character> mutatedFrom = getMutatedFrom(firstCharacter, secondCharacter, from);
         List<Character> mutatedTo = getMutatedTo(firstCharacter, secondCharacter, to);
 
-        Map<GameAreaView, GameArea> newGameArea = new HashMap<>();
+        Map<GameAreaView, GameArea> newGameArea = new EnumMap<>(GameAreaView.class);
         newGameArea.put(fromArea, new GameArea(mutatedFrom));
         newGameArea.put(toArea, new GameArea(mutatedTo));
         Arrays.stream(values()).filter(area -> area != fromArea && area != toArea).forEach(area -> newGameArea.put(area, gameArea.get(area)));
@@ -76,7 +84,7 @@ public class GameState {
     private List<Character> getMutatedFrom(Character firstCharacter, Character secondCharacter, GameArea from) {
         List<Character> mutableFrom = new ArrayList<>(from.characters());
 
-        if ((firstCharacter != null && !mutableFrom.remove(firstCharacter)) || (secondCharacter != null && !mutableFrom.remove(secondCharacter))) {
+        if (firstCharacter != null && !mutableFrom.remove(firstCharacter) || secondCharacter != null && !mutableFrom.remove(secondCharacter)) {
             throw new IllegalArgumentException();
         }
 

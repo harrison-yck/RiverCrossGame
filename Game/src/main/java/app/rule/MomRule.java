@@ -16,7 +16,7 @@ public class MomRule implements GameRule {
     }
 
     boolean validate(Set<Identity> identities) {
-        return identities.isEmpty() || !identities.contains(Identity.MOM) || !identities.contains(Identity.SON) || (identities.contains(Identity.DAD) && identities.contains(Identity.SON));
+        return identities.isEmpty() || !identities.contains(Identity.MOM) || !identities.contains(Identity.SON) || identities.contains(Identity.DAD) && identities.contains(Identity.SON);
     }
 
     @Override

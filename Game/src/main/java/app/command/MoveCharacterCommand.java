@@ -8,10 +8,12 @@ import app.data.GameAreaView;
 import app.data.GameState;
 import app.data.GameStateMemento;
 
+import java.util.Locale;
+
 /**
  * @author harrison
  */
-public class MoveCharacterCommand extends RevertableCommand {
+public class MoveCharacterCommand extends ReversibleCommand {
     private final GameRuleValidator validator;
 
     public MoveCharacterCommand(GameRuleValidator validator) {
@@ -19,11 +21,11 @@ public class MoveCharacterCommand extends RevertableCommand {
     }
 
     @Override
-    public GameState execute(GameState state, String[] parameters) throws IllegalArgumentException, IndexOutOfBoundsException {
-        Character firstCharacter = "null".equalsIgnoreCase(parameters[0]) ? null : Characters.of(Identity.valueOf(parameters[0].toUpperCase()));
-        Character secondCharacter = "null".equalsIgnoreCase(parameters[1]) ? null : Characters.of(Identity.valueOf(parameters[1].toUpperCase()));
-        GameAreaView fromArea = GameAreaView.valueOf(parameters[2].toUpperCase());
-        GameAreaView toArea = GameAreaView.valueOf(parameters[3].toUpperCase());
+    public GameState execute(GameState state, String[] parameters) {
+        Character firstCharacter = "null".equalsIgnoreCase(parameters[0]) ? null : Characters.of(Identity.valueOf(parameters[0].toUpperCase(Locale.ENGLISH)));
+        Character secondCharacter = "null".equalsIgnoreCase(parameters[1]) ? null : Characters.of(Identity.valueOf(parameters[1].toUpperCase(Locale.ENGLISH)));
+        GameAreaView fromArea = GameAreaView.valueOf(parameters[2].toUpperCase(Locale.ENGLISH));
+        GameAreaView toArea = GameAreaView.valueOf(parameters[3].toUpperCase(Locale.ENGLISH));
 
         if (fromArea != GameAreaView.BOAT_AREA && toArea != GameAreaView.BOAT_AREA)
             throw new IllegalArgumentException();
@@ -32,7 +34,7 @@ public class MoveCharacterCommand extends RevertableCommand {
 
         if (validator.isValid(newState)) {
             memento = new GameStateMemento(state);
-            undoList.push(this);
+            UNDO_LIST.push(this);
             return newState;
         }
 

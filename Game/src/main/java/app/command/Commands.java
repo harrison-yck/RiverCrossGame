@@ -2,7 +2,7 @@ package app.command;
 
 
 import app.command.factory.MoveCharacterCommandFactory;
-import app.command.factory.RevertableCommandFactory;
+import app.command.factory.ReversibleCommandFactory;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class Commands {
         "restart", new RestartCommand()
     );
 
-    private static final Map<String, RevertableCommandFactory> REVERTABLE_COMMANDS = Map.of(
+    private static final Map<String, ReversibleCommandFactory> REVERTABLE_COMMANDS = Map.of(
         "move", new MoveCharacterCommandFactory()
     );
 
@@ -25,7 +25,7 @@ public class Commands {
         return COMMANDS;
     }
 
-    public static Map<String, RevertableCommandFactory> getRevertableCommandFactortories() {
+    public static Map<String, ReversibleCommandFactory> getRevertableCommandFactortories() {
         return REVERTABLE_COMMANDS;
     }
 }

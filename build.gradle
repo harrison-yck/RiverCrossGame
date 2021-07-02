@@ -33,3 +33,5 @@ allprojects {
 tasks.withType( JavaCompile ).configureEach {
     options.forkOptions.jvmArgs.addAll( ['--add-opens', 'jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED'] )
 }
+
+apply from: file("${rootDir}/gradle/check.gradle")

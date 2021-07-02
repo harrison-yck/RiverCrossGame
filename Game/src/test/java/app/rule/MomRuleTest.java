@@ -1,12 +1,12 @@
 package app.rule;
 
 import app.character.Identity;
-import app.rule.MomRule;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MomRuleTest {
     @Test

@@ -8,8 +8,8 @@ import java.util.Stack;
  * @author harrison
  */
 public interface Command {
-    Stack<RevertableCommand> undoList = new Stack<>();
-    Stack<RevertableCommand> redoList = new Stack<>();
+    Stack<ReversibleCommand> UNDO_LIST = new Stack<>();
+    Stack<ReversibleCommand> REDO_LIST = new Stack<>();
 
     GameState execute(GameState state, String[] parameters);
 

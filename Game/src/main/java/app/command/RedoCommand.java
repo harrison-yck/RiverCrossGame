@@ -8,13 +8,13 @@ import app.data.GameState;
 public class RedoCommand implements Command {
     @Override
     public GameState execute(GameState state, String[] parameters) {
-        if (redoList.isEmpty()) {
+        if (REDO_LIST.isEmpty()) {
             System.out.println();
             System.out.println("No redo action is available !");
             System.out.println();
-            return null;
+            return null; // expected result, no exception is throw here
         } else {
-            RevertableCommand command = redoList.pop();
+            ReversibleCommand command = REDO_LIST.pop();
             return command.redo(state);
         }
     }

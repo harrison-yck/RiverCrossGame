@@ -9,8 +9,8 @@ import app.data.GameState;
 public class RestartCommand implements Command {
     @Override
     public GameState execute(GameState state, String[] parameters) {
-        undoList.removeAllElements();
-        redoList.removeAllElements();
+        UNDO_LIST.removeAllElements();
+        REDO_LIST.removeAllElements();
         return new GameState();
     }
 

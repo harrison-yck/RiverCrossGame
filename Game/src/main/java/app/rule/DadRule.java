@@ -17,7 +17,7 @@ public class DadRule implements GameRule {
     }
 
     boolean validate(Set<Identity> identities) {
-        return identities.isEmpty() || !identities.contains(Identity.DAD) || !identities.contains(Identity.DAUGHTER) || (identities.contains(Identity.DAUGHTER) && identities.contains(Identity.MOM));
+        return identities.isEmpty() || !identities.contains(Identity.DAD) || !identities.contains(Identity.DAUGHTER) || identities.contains(Identity.MOM);
     }
 
     @Override
