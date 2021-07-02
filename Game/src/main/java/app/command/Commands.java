@@ -12,9 +12,6 @@ import java.util.Map;
 public class Commands {
     // key = command alias
     private static final Map<String, Command> COMMANDS = Map.of(
-        "undo", new UndoCommand(),
-        "redo", new RedoCommand(),
-        "restart", new RestartCommand()
     );
 
     private static final Map<String, ReversibleCommandFactory> REVERTABLE_COMMANDS = Map.of(

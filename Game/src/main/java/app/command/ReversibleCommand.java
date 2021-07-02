@@ -15,17 +15,11 @@ public abstract class ReversibleCommand implements Command {
     @Override
     public abstract String getDescription();
 
-    public GameState undo(GameState state) {
-        GameState oldState = memento.restore();
-        memento = new GameStateMemento(state);
-        this.REDO_LIST.push(this);
-        return oldState;
+    public void save(GameStateMemento memento) {
+        this.memento = memento;
     }
 
-    public GameState redo(GameState state) {
-        GameState oldState = memento.restore();
-        memento = new GameStateMemento(state);
-        UNDO_LIST.push(this);
-        return oldState;
+    public GameState restore() {
+        return memento.restore();
     }
 }
