@@ -32,6 +32,6 @@
 - Reversible Command: extends the ReversibleCommand class and add it to REVERSIBLE_COMMANDS Map of Commands class with command alias
 - Rule: implements the GameRule interface and add it to RULES set of GameRules class
 ## Note 
-In this project, comment is seldomly used since if I think the code is clear enough and comment can be too verbose for most of the cases.
+In this project, I do not want to use a lot of comments, since if the code is clear enough, comment can be too verbose for most of the cases.
 
 In normal case, tests should be split by cases, but for simplicity, I put them together in rule tests.
