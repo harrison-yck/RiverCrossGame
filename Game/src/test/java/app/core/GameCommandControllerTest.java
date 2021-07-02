@@ -13,7 +13,7 @@ class GameCommandControllerTest {
 
     @BeforeEach
     void init() {
-        controller = new GameCommandController(Commands.getCommands(), Commands.getRevertableCommandFactortories(), new GameRuleValidator());
+        controller = new GameCommandController(Commands.getCommands(), Commands.getReversibleCommandFactories(), new GameRuleValidator());
     }
 
     @Test
@@ -28,7 +28,7 @@ class GameCommandControllerTest {
 
     @Test
     void undo() {
-        GameCommandController controller = new GameCommandController(Commands.getCommands(), Commands.getRevertableCommandFactortories(), new GameRuleValidator());
+        GameCommandController controller = new GameCommandController(Commands.getCommands(), Commands.getReversibleCommandFactories(), new GameRuleValidator());
         GameState originalState = new GameState();
 
         GameState currentState = controller.execute("move POLICEMAN CRIMINAL START_AREA BOAT_AREA", originalState);
@@ -38,7 +38,7 @@ class GameCommandControllerTest {
 
     @Test
     void redo() {
-        GameCommandController controller = new GameCommandController(Commands.getCommands(), Commands.getRevertableCommandFactortories(), new GameRuleValidator());
+        GameCommandController controller = new GameCommandController(Commands.getCommands(), Commands.getReversibleCommandFactories(), new GameRuleValidator());
         GameState currentState = controller.execute("move POLICEMAN CRIMINAL START_AREA BOAT_AREA", new GameState());
         GameState secondState = currentState;
 

@@ -14,7 +14,7 @@ public class Commands {
     private static final Map<String, Command> COMMANDS = Map.of(
     );
 
-    private static final Map<String, ReversibleCommandFactory> REVERTABLE_COMMANDS = Map.of(
+    private static final Map<String, ReversibleCommandFactory> REVERSIBLE_COMMANDS = Map.of(
         "move", new MoveCharacterCommandFactory()
     );
 
@@ -22,7 +22,7 @@ public class Commands {
         return COMMANDS;
     }
 
-    public static Map<String, ReversibleCommandFactory> getRevertableCommandFactortories() {
-        return REVERTABLE_COMMANDS;
+    public static Map<String, ReversibleCommandFactory> getReversibleCommandFactories() {
+        return REVERSIBLE_COMMANDS;
     }
 }
