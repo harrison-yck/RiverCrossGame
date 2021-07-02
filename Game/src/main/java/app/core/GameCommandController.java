@@ -62,7 +62,7 @@ public class GameCommandController {
         if (command != null) {
             newGameState = command.execute(state, Arrays.copyOfRange(inputs, 1, inputs.length));
         } else if (factory != null) {
-            reversibleCommand = factory.createCommand();
+            reversibleCommand = factory.createCommand(); // state is stored in command's memento, so need to instantiate a new one
             newGameState = reversibleCommand.execute(state, Arrays.copyOfRange(inputs, 1, inputs.length));
         }
 
