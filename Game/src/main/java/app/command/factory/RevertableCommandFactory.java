@@ -1,4 +1,6 @@
-package app.command;
+package app.command.factory;
+
+import app.command.Command;
 
 /**
  * @author harrison

@@ -1,6 +1,9 @@
 package app.command;
 
 
+import app.command.factory.MoveCharacterCommandFactory;
+import app.command.factory.RevertableCommandFactory;
+
 import java.util.Map;
 
 /**
@@ -8,7 +11,7 @@ import java.util.Map;
  */
 public class Commands {
     // key = command alias
-    private static final Map<String, Command> AVAILABLE_COMMANDS = Map.of(
+    private static final Map<String, Command> COMMANDS = Map.of(
         "undo", new UndoCommand(),
         "redo", new RedoCommand(),
         "restart", new RestartCommand()
@@ -19,7 +22,7 @@ public class Commands {
     );
 
     public static Map<String, Command> getCommands() {
-        return AVAILABLE_COMMANDS;
+        return COMMANDS;
     }
 
     public static Map<String, RevertableCommandFactory> getRevertableCommandFactortories() {

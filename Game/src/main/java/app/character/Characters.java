@@ -30,7 +30,7 @@ public class Characters {
             CHARACTERS.get(CRIMINAL)
     );
 
-    public static List<Character> getDefaultCharacter() {
+    public static List<Character> getDefaultCharacters() {
         return DEFAULT_CHARACTERS;
     }
 

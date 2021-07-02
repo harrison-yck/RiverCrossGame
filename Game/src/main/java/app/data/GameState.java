@@ -18,7 +18,7 @@ public class GameState {
 
     private static Map<GameAreaView, GameArea> initialGameArea() {
         return Map.of(
-                GameAreaView.START_AREA, new GameArea(Characters.getDefaultCharacter()),
+                GameAreaView.START_AREA, new GameArea(Characters.getDefaultCharacters()),
                 GameAreaView.BOAT_AREA, new GameArea(new ArrayList<>(BOAT_CAPACITY)),
                 GameAreaView.END_AREA, new GameArea(new ArrayList<>(TOTAL_PEOPLE))
         );

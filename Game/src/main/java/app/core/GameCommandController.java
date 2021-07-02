@@ -2,7 +2,7 @@ package app.core;
 
 import app.character.Characters;
 import app.command.Command;
-import app.command.RevertableCommandFactory;
+import app.command.factory.RevertableCommandFactory;
 import app.data.GameAreaView;
 import app.data.GameState;
 

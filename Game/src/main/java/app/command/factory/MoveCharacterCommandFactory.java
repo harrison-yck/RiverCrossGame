@@ -1,5 +1,7 @@
-package app.command;
+package app.command.factory;
 
+import app.command.Command;
+import app.command.MoveCharacterCommand;
 import app.core.GameRuleValidator;
 
 /**

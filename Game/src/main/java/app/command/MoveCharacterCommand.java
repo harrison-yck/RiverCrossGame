@@ -13,7 +13,6 @@ import app.data.GameStateMemento;
  */
 public class MoveCharacterCommand extends RevertableCommand {
     private final GameRuleValidator validator;
-    private GameStateMemento memento;
 
     public MoveCharacterCommand(GameRuleValidator validator) {
         this.validator = validator;
@@ -43,25 +42,5 @@ public class MoveCharacterCommand extends RevertableCommand {
     @Override
     public String getDescription() {
         return "Usage: move <CHARACTER1> <CHARACTER2> <FROM_AREA> <TO_AREA>, put null in <CHARACTER> if move one character only";
-    }
-
-    @Override
-    public GameState undo(GameState state) {
-        GameState oldState = memento.restore();
-        memento = new GameStateMemento(state);
-        this.redoList.push(this);
-        return oldState;
-    }
-
-    @Override
-    public GameState redo(GameState state) {
-        // load old state
-        GameState oldState = memento.restore();
-
-        // save current state
-        memento = new GameStateMemento(state);
-        undoList.push(this);
-
-        return oldState;
     }
 }
